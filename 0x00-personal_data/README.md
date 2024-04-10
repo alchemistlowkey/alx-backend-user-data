@@ -1,4 +1,5 @@
 # Personal data
+![personal_data](https://github.com/alchemistlowkey/alx-backend-user-data/assets/46524038/d1cd7a5d-c8bb-40c8-a6d3-2613282835cf)
 
 ## Resources
 #### Read or watch:
