@@ -8,6 +8,8 @@ import logging
 import os
 import mysql.connector
 
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
 
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
@@ -58,9 +60,6 @@ class RedactingFormatter(logging.Formatter):
                             super().format(record), self.SEPARATOR)
 
 
-PII_FIELDS = ("name", "email", "phone", "password", "ssn")
-
-
 def get_logger() -> logging.Logger:
     """
     A function that takes no arguments and returns a logging.Logger object
@@ -94,3 +93,31 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     )
 
     return db
+
+
+def main() -> None:
+    """
+    A function that will obtain a database connection using get_db
+    and retrieve all rows in the users table
+    and display each row under a filtered format
+    """
+    logger = get_logger()
+
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()
+
+    for row in rows:
+        message = "; ".join(
+            f"{field}={value} " for field, value in zip(PII_FIELDS, rows)
+        )
+        logger.info(message)
+
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
