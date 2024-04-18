@@ -5,6 +5,8 @@ In this project, you will implement a **Session Authentication.** You are not al
 
 In the industry, you should not implement your own Session authentication system and use a module or framework that doing it for you (like in Python-Flask: [Flask-HTTPAuth](https://flask-httpauth.readthedocs.io/en/latest/)). Here, for the learning purpose, we will walk through each step of this mechanism to understand it by doing.
 
+![session_auth](https://github.com/alchemistlowkey/alx-backend-user-data/assets/46524038/1489783c-d90d-4597-9e78-e87c8ff64119)
+
 ## Resources
 #### Read or watch:
 - [REST API Authentication Mechanisms - Only the session auth part](https://www.youtube.com/watch?v=501dpx2IjGY)
