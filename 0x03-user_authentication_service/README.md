@@ -1,4 +1,5 @@
 # User authentication service
+![UserAuthenticationService](https://github.com/alchemistlowkey/alx-backend-user-data/assets/46524038/63f85335-dac7-46ed-9686-15a7354fa1be)
 
 In the industry, you should not implement your own authentication system and use a module or framework that doing it for you (like in Python-Flask: [Flask-User](https://flask-user.readthedocs.io/en/latest/)). Here, for the learning purpose, we will walk through each step of this mechanism to understand it by doing.
 
@@ -34,7 +35,7 @@ At the end of this project, you are expected to be able to [explain to anyone](h
 - The flask app should only interact with `Auth` and never with `DB` directly.
 - Only public methods of `Auth` and `DB` should be used outside these classes
 
-##Setup
+## Setup
 You will need to install `bcrypt`
 ```
 pip3 install bcrypt
