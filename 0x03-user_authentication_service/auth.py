@@ -5,21 +5,21 @@ from sqlalchemy.orm.exc import NoResultFound
 
 
 def _hash_password(password: str) -> bytes:
-        """
-        Hash a password using bcrypt
+    """
+    Hash a password using bcrypt
 
-        Args:
-            password (str): The password to hash
+    Args:
+        password (str): The password to hash
 
-        Returns:
-            bytes: Salted hash of the input password
-        """
+    Returns:
+        bytes: Salted hash of the input password
+    """
 
-        salted = gensalt()
+    salted = gensalt()
 
-        hashed_input_password = hashpw(password.encode('utf-8'), salted)
+    hashed_input_password = hashpw(password.encode('utf-8'), salted)
 
-        return hashed_input_password
+    return hashed_input_password
 
 
 class Auth:
@@ -49,5 +49,5 @@ class Auth:
             raise ValueError(f"User {email} already exists")
         except NoResultFound:
             hashed_password = _hash_password(password)
-            user = self._db.add_user(email=email, hashed_password=hashed_password)
+            user = self._db.add_user(email, hashed_password)
             return user
