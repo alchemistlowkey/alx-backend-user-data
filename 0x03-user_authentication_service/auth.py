@@ -6,6 +6,7 @@ from bcrypt import hashpw, gensalt, checkpw
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
+from uuid import uuid4
 
 
 def _hash_password(password: str) -> bytes:
@@ -24,6 +25,13 @@ def _hash_password(password: str) -> bytes:
     hashed_input_password = hashpw(password.encode('utf-8'), salted)
 
     return hashed_input_password
+
+
+def _generate_uuid() -> str:
+    """
+    The function that return a string representation of a new UUID.
+    """
+    return str(uuid4())
 
 
 class Auth:
@@ -70,3 +78,15 @@ class Auth:
             return pass_check
         except NoResultFound:
             return False
+
+    def create_session(self, email: str) -> str:
+        """
+        The Method that create a session with the user email
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+            session_id = _generate_uuid()
+            self._db.update_user(user.id, session_id=session_id)
+            return session_id
+        except NoResultFound:
+            pass
